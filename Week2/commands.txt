@@ -1,0 +1,5 @@
+Start containers: docker compose up
+or docker compose up -d : This will keep services 
+still running in the background
+Attach containers: docker attach nameofcontainer
+From bash: node server.js
