@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo Input</title>
+  </head>
+  <body>
+    <label for="demo-input">Enter text</label>
+    <input id="demo-input" type="text" placeholder="Type here" />
+    <button id="submit-btn" type="button">Submit</button>
+    <br />
+    <br />
+    <textarea id="demo-output" placeholder="More text" rows="4" cols="30"></textarea>
+    <script>
+        (async () => {
+            const submitButton = document.getElementById("submit-btn");
+            const inputField = document.getElementById("demo-input");
+            const outputField = document.getElementById("demo-output");
+
+             // Fetch existing messages
+             const response = await fetch("/messages");
+             const data = await response.json();
+             if (Array.isArray(data.postedMessages) && data.postedMessages.length > 0) {
+                outputField.value = data.postedMessages.join("\n");
+             } else {
+                outputField.value = "No messages yet.";
+             }
+             
+             // Handle new messages
+             submitButton.addEventListener("click", async () => {
+                const text = inputField.value;
+                if (text.length === 0) return;
+                const response = await fetch("/messages", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await response.json();
+                if (Array.isArray(data.postedMessages)) {
+                    outputField.value = data.postedMessages.join("\n");
+                }
+                inputField.value = "";
+             });  
+        })();  
+    </script>
+  </body>
+</html>
