@@ -1,0 +1,10 @@
+- server.js works with pages/server.html
+
+- server1 and server2 work with pages/server12.html
+
+- server3 works with posting.html
+
+
+
+Your Task
+-Write a Dockerfile and docker-compose to run server3 and posting html
