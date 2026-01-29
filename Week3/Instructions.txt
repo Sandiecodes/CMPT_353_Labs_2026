@@ -3,8 +3,10 @@
 - server1 and server2 work with pages/server12.html
 
 - server3 works with posting.html
-
+- server4 works with index, addposts, posts HTML files
 
 
 Your Task
--Write a Dockerfile and docker-compose to run server3 and posting html
+-Write a Dockerfile and docker-compose to run server4 with its corresponding HTML
+
+Github: https://github.com/Sandiecodes/CMPT_353_Labs_2026/tree/main/Week3
