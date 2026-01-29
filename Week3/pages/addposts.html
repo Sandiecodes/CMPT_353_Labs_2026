@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo Input</title>
+  </head>
+  <body>
+    <h1>Add Posts</h1>
+    <label for="demo-input">Enter text</label>
+    <input id="demo-input" type="text" placeholder="Type here" />
+    <button id="submit-btn" type="button">Submit</button>
+
+    <br />
+     <p><a href="/index.html">Back</a></p>
+    <script>
+        (async () => {
+            const submitButton = document.getElementById("submit-btn");
+            const inputField = document.getElementById("demo-input");
+            const outputField = document.getElementById("demo-output");
+             
+             // Handle new messages
+             submitButton.addEventListener("click", async () => {
+                const text = inputField.value;
+                if (text.length === 0) {
+                    alert("Text field cannot be empty.");
+                    return;
+                }
+                const response = await fetch("/messages", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: text })
+                });
+
+                if(!response.ok) {
+                    alert("Failed to save message.");
+                    return;
+                }
+                inputField.value = "";
+                alert("Message Added");
+             });  
+        })();  
+    </script>
+  </body>
+</html>

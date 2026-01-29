@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo Input</title>
+  </head>
+  <body>
+    <h1>All Posts</h1>
+    <textarea id="demo-output" placeholder="More text" rows="4" cols="30"></textarea>
+        <br />
+     <p><a href="/index.html">Back</a></p>
+    <script>
+        (async () => {
+
+            const outputField = document.getElementById("demo-output");
+
+             // Fetch existing messages
+             const response = await fetch("/messages");
+             const data = await response.json();
+             if (Array.isArray(data.postedMessages) && data.postedMessages.length > 0) {
+                outputField.value = data.postedMessages
+                .map(msg => `${msg.text} (${msg.timestamp})`)
+                .join("\n");
+             } else {
+                outputField.value = "No messages yet.";
+             }
+                
+        })();  
+    </script>
+  </body>
+</html>
