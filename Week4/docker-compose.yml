@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./express-ts-api
+    container_name: express-ts-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./express-ts-api:/app
+      - /app/node_modules
+      #- /app/dist
+    command: npx ts-node server.ts  
+    #command: node dist/server.js
+
+  frontend:
+    build: ./react-ts-crud
+    container_name: react-ts-crud
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./react-ts-crud:/react-app
+      - /react-app/node_modules
+    environment:
+      - VITE_API_URL=http://host.docker.internal:8080
+    command: npm run dev -- --host 0.0.0.0
