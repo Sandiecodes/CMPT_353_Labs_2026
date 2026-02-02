@@ -1,0 +1,26 @@
+Step1: Creating new Nodejs + TypeScript App: express-ts-api
+
+	1.	npm init -y 
+	2.	npm install express
+	3.	npm install -D typescript ts-node @types/node @types/express
+	4.	For CORS: npm install cors then npm install -D @types/cors
+	5.	npm pkg set type=module
+	6.	npx tsc --init
+   7. Running your code: npx tsc then node dist/server.js. NB: make sure you have uncomment the outDir and rootDir in your tsconfig.json
+Or
+
+npx ts-node server.ts
+
+
+Step 2: Creating new React + Nodejs + TypeScript: react-ts-crud
+	1.	npm create vite@latest react-ts-crud --template react-ts
+	2.	cd react-ts-crud
+	3.	npm install
+	4.	npm run dev
+  5. All your source codes should be in src folder
+
+
+Running on docker: Just run this when you follow the file structure on GitHub, no need to go via Step 1 and 2
+1. Run docker compose up -d from your root directory 
+Server: http://localhost:8080/users
+React: http://localhost:5173/
