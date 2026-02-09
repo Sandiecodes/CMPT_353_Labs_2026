@@ -1,0 +1,39 @@
+services:
+ datastore:
+  build: .
+  container_name: datastore
+  ports:
+   - "81:8080"
+  volumes:
+   - ./ds/:/usr/src/app/
+  environment:
+    DB_HOST: db
+    DB_USER: root
+    DB_PASSWORD: admin
+  depends_on: 
+   - db
+  stdin_open: true
+  tty: true
+ react:
+  build: .
+  container_name: react
+  ports:
+   - "80:5173"
+  volumes:
+   - ./react/app-1/:/usr/src/app/
+  stdin_open: true
+  tty: true
+ db:
+  image: mysql:latest
+  container_name: db
+  ports:
+   - "3306:3306"
+  environment:
+   MYSQL_ROOT_PASSWORD: rootpassword
+   MYSQL_DATABASE: appdb
+  volumes:
+   - ./db_data:/var/lib/mysql
+  stdin_open: true
+  tty: true 
+
+  
