@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./express-ts-api
+    container_name: express-ts-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./express-ts-api:/app
+      - /app/node_modules
+    command: npx ts-node server.ts
+    environment:
+      DB_HOST: mysql1
+      DB_USER: root
+      DB_PASSWORD: admin
+    depends_on:
+      mysql1:
+        condition: service_healthy
+
+  frontend:
+    build: ./react-ts-crud
+    container_name: react-ts-crud
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./react-ts-crud:/react-app
+      - /react-app/node_modules
+    environment:
+      - VITE_API_URL=http://host.docker.internal:8080
+    command: npm run dev -- --host 0.0.0.0
+
+  mysql1:
+    image: mysql:8.0
+    container_name: mysql1
+
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      #interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "3306:3306"  
+    volumes:
+      - ./db_data:/var/lib/mysql
+    stdin_open: true
+    tty: true  
+
+volumes:
+  db_data:
+          driver: local

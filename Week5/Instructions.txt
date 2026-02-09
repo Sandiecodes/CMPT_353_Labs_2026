@@ -1,0 +1,15 @@
+Instructions
+
+Continuing from Week 4:
+
+1. Replace the server.ts in Week 4 with the server.ts in Week 5 for Mysql example
+2. Cd into the express-ts-api folder and install mysql2; npm install mysql2
+3.  Replace the docker-compose in Week 4 with the docker-compose  in Week 5 for Mysql example
+4. Cd into the react-ts-crud and install react-router-dom; nom install react-router-dom
+5. Replace the App.jsx in Week 4 with the App.jsx in Week 5 
+
+Running Code: docker compose up -d
+
+Create database and table: http://localhost:8080/init
+Backend: http://localhost:8080/users
+Frontend: http://localhost:5173
