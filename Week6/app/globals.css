@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+
+/* globals.css */
+
+/* Page container */
+.main-container {
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+/* Inputs and buttons */
+.input-field {
+  margin-right: 0.5rem;
+  padding: 0.3rem 0.5rem;
+}
+
+.button {
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.3rem;
+  cursor: pointer;
+}
+
+/* Table styling */
+.users-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.users-table th,
+.users-table td {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: left;
+}
+
+.users-table th {
+  background-color: #f0f0f0;
+}
