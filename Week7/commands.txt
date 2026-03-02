@@ -1,0 +1,10 @@
+Add Data
+curl -X POST http://0.0.0.0:3001/posts -H "Content-Type:application/json" -d '{"id":4,"text":"Welcome","time":"10am"}'
+
+Update
+curl -X PUT -H "Content-Type: application/json" -d '{"text": "Update", "time": "5"}' http://localhost:3001/posts/4
+
+Delete
+curl -X DELETE http://localhost:3001/posts/4
+
+
