@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Auth</title>
+</head>
+<body>
+
+<h2>Register</h2>
+<input id="regUser" placeholder="username">
+<input id="regPass" type="password" placeholder="password">
+<button onclick="register()">Register</button>
+
+<h2>Login</h2>
+<input id="logUser" placeholder="username">
+<input id="logPass" type="password" placeholder="password">
+<button onclick="login()">Login</button>
+
+<h2>Actions</h2>
+<button onclick="dashboard()">Go to Dashboard</button>
+<button onclick="logout()">Logout</button>
+
+<h3>Response:</h3>
+<pre id="output"></pre>
+
+<script>
+const output = document.getElementById('output');
+
+// REGISTER
+async function register() {
+    const username = document.getElementById('regUser').value;
+    const password = document.getElementById('regPass').value;
+
+    const res = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    });
+
+    output.textContent = await res.text();
+}
+
+// LOGIN
+async function login() {
+    const username = document.getElementById('logUser').value;
+    const password = document.getElementById('logPass').value;
+
+    const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+        credentials: 'include' // 🔥 important for sessions
+    });
+
+    output.textContent = await res.text();
+}
+
+// DASHBOARD (protected)
+async function dashboard() {
+    const res = await fetch('/dashboard', {
+        credentials: 'include'
+    });
+
+    output.textContent = await res.text();
+}
+
+// LOGOUT
+async function logout() {
+    const res = await fetch('/logout', {
+        credentials: 'include'
+    });
+
+    output.textContent = await res.text();
+}
+</script>
+
+</body>
+</html>
